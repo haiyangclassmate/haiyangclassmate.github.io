@@ -71,6 +71,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-文件上传与下载" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" class="article-date">
+  <time class="dt-published" datetime="2021-04-15T06:12:09.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">文件的上传与下载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="文件的上传与下载"><a href="#文件的上传与下载" class="headerlink" title="文件的上传与下载"></a>文件的上传与下载</h1><p><font color="red" font-weight=bold>前提是需要两个jar包</font></p>
+<ul>
+<li>commons-fileupload-1.2.2.jar</li>
+<li>commons-io-2.4.jar</li>
+</ul>
+<p><strong>文件上传</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line">		PrintWriter out = response.getWriter();</span><br><span class="line">		HttpSession session = request.getSession();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//判定请求是否是带有文件的请求</span></span><br><span class="line">		<span class="keyword">if</span>(ServletFileUpload.isMultipartContent(request))&#123;</span><br><span class="line">			<span class="comment">//创建upload对象</span></span><br><span class="line">			ServletFileUpload upload = <span class="keyword">new</span> ServletFileUpload(<span class="keyword">new</span> DiskFileItemFactory());</span><br><span class="line">			<span class="keyword">int</span> max = <span class="number">1780832</span>;</span><br><span class="line">			upload.setFileSizeMax(max);</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="comment">//upload对象解析请求（中的数据） </span></span><br><span class="line">				List&lt;FileItem&gt; items = upload.parseRequest(request);  <span class="comment">//文件项   请求中的每一个数据项</span></span><br><span class="line">				String username = <span class="string">&quot;&quot;</span>;</span><br><span class="line">				<span class="keyword">for</span> (FileItem item : items) &#123;</span><br><span class="line">					<span class="keyword">if</span> (!item.isFormField()) &#123; <span class="comment">//文件域数据</span></span><br><span class="line">						String fileName = item.getName();</span><br><span class="line">						<span class="keyword">if</span>(fileName.endsWith(<span class="string">&quot;.jpg&quot;</span>) || fileName.endsWith(<span class="string">&quot;.png&quot;</span>) || fileName.endsWith(<span class="string">&quot;.gif&quot;</span>) )&#123;</span><br><span class="line">							<span class="comment">//设定文件保存在服务器端的目录位置</span></span><br><span class="line">							String savePath = session.getServletContext().getRealPath(<span class="string">&quot;\\WEB-INF\\upload\\&quot;</span>+username);</span><br><span class="line">							<span class="comment">//保证该目录存在</span></span><br><span class="line">							File dir = <span class="keyword">new</span> File(savePath);</span><br><span class="line">							<span class="keyword">if</span>(!dir.exists()) dir.mkdirs();</span><br><span class="line">							<span class="comment">//设置唯一ID</span></span><br><span class="line">							String uuid = UUID.randomUUID().toString();</span><br><span class="line">							</span><br><span class="line">							<span class="comment">//用item.write把上传上来的文件写到该目录中</span></span><br><span class="line">							item.write(<span class="keyword">new</span> File(dir, uuid+<span class="string">&quot;-&quot;</span>+fileName));</span><br><span class="line">							session.setAttribute(<span class="string">&quot;info&quot;</span>, <span class="string">&quot;上传成功！&quot;</span>);</span><br><span class="line">							response.sendRedirect(<span class="string">&quot;welcome.jsp&quot;</span>);</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							session.setAttribute(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;文件格式必须是jpg、png、gif格式，上传失败！&quot;</span>);</span><br><span class="line">							response.sendRedirect(<span class="string">&quot;index.jsp&quot;</span>);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">						username = item.getString();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">catch</span>(FileUploadBase.FileSizeLimitExceededException e)&#123;</span><br><span class="line">				session.setAttribute(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;文件大小超过了最大值限制（最大&quot;</span>+max+<span class="string">&quot;字节）&quot;</span>);</span><br><span class="line">				response.sendRedirect(<span class="string">&quot;index.jsp&quot;</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		out.flush();</span><br><span class="line">		out.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件下载</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//		PrintWriter out = response.getWriter();</span></span><br><span class="line">		HttpSession session =request.getSession();</span><br><span class="line">		</span><br><span class="line">		String opr = request.getParameter(<span class="string">&quot;opr&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(opr == <span class="keyword">null</span>)&#123;</span><br><span class="line">			List&lt;String&gt; fileNames = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">			fileNames.add(<span class="string">&quot;Lighthouse.jpg&quot;</span>);</span><br><span class="line">			fileNames.add(<span class="string">&quot;Penguins.jpg&quot;</span>);</span><br><span class="line">			fileNames.add(<span class="string">&quot;Tulips.jpg&quot;</span>);</span><br><span class="line">			</span><br><span class="line">			session.setAttribute(<span class="string">&quot;names&quot;</span>, fileNames);</span><br><span class="line">			response.sendRedirect(<span class="string">&quot;index.jsp&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">&quot;download&quot;</span>.equals(opr))&#123;</span><br><span class="line">			List&lt;String&gt; fileNames = (List&lt;String&gt;)session.getAttribute(<span class="string">&quot;names&quot;</span>);</span><br><span class="line">			<span class="keyword">int</span> index = Integer.valueOf(request.getParameter(<span class="string">&quot;index&quot;</span>));</span><br><span class="line">			String fileName = fileNames.get(index);  <span class="comment">//获取到要下载的文件名</span></span><br><span class="line">			File file = <span class="keyword">new</span> File(<span class="string">&quot;D:\\download\\&quot;</span>+fileName);</span><br><span class="line">			<span class="keyword">if</span>(file.exists())&#123;</span><br><span class="line">				<span class="comment">//把服务器端目录中的文件读取到程序中来</span></span><br><span class="line">				FileInputStream fis = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">				<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[fis.available()];</span><br><span class="line">				fis.read(bytes);  <span class="comment">//图片的所有数据都在bytes数组中</span></span><br><span class="line">				<span class="comment">//设置响应头(让它以附件形式出现数据)</span></span><br><span class="line">				response.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span></span><br><span class="line">						+ fileName);</span><br><span class="line">				<span class="comment">//搞一个输出流（response身上获取）把bytes以附件的形式输出到页面</span></span><br><span class="line">				ServletOutputStream sos = response.getOutputStream();</span><br><span class="line">				sos.write(bytes);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line"><span class="comment">//		out.flush();</span></span><br><span class="line"><span class="comment">//		out.close();</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;utf-8&quot;</span>%&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span> %&gt;</span><br><span class="line">&lt;%</span><br><span class="line">String path = request.getContextPath();</span><br><span class="line">String basePath = request.getScheme()+<span class="string">&quot;://&quot;</span>+request.getServerName()+<span class="string">&quot;:&quot;</span>+request.getServerPort()+path+<span class="string">&quot;/&quot;</span>;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;base href=<span class="string">&quot;&lt;%=basePath%&gt;&quot;</span>&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;title&gt;My JSP &#x27;index.jsp&#x27; starting page&lt;/title&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.12.4.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    	$(function()&#123;</span><br><span class="line">    		</span><br><span class="line">    	&#125;);</span><br><span class="line">    	<span class="function">function <span class="title">show</span><span class="params">(index)</span></span>&#123;</span><br><span class="line">    		location.href = <span class="string">&quot;DownLoadServlet?opr=download&amp;index=&quot;</span>+index;</span><br><span class="line">    	&#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">	</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  	&lt;!-- 把服务器端的真实路径D:\\download映射成虚拟路径/ccc 给jsp页面使用 --&gt;</span><br><span class="line">  	&lt;!-- &lt;Context path=&quot;/ccc/&quot; docBase=&quot;D:\\download&quot;&gt;&lt;/Context&gt; --&gt;</span><br><span class="line">  	&lt;!--  配置在server.xml的Host节点里的最后 --&gt;</span><br><span class="line">  </span><br><span class="line">    &lt;c:forEach <span class="keyword">var</span>=<span class="string">&quot;name&quot;</span> items=<span class="string">&quot;$&#123;names &#125;&quot;</span> varStatus=<span class="string">&quot;status&quot;</span>&gt;</span><br><span class="line">    	&lt;img src=&quot;/ccc/$&#123;name &#125;&quot; width=&quot;15%&quot;/&gt;&amp;nbsp;&lt;a href=&quot;javascript:;&quot; onclick=&quot;show($&#123;status.index&#125;)&quot;&gt;下载&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">    &lt;/c:forEach&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" data-id="cknhkb84k0005hwvc5umm34ox" data-title="文件的上传与下载" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-JSP的四大作用域及Cookie" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/" class="article-date">
@@ -280,6 +330,44 @@
 
 
   
+    <article id="post-阿里公网IP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" class="article-date">
+  <time class="dt-published" datetime="2021-04-15T02:12:09.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/">阿里云公网IP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="rm-bp1w2dfps13v39w02no-mysql-rds-aliyuncs-com"><a href="#rm-bp1w2dfps13v39w02no-mysql-rds-aliyuncs-com" class="headerlink" title="rm-bp1w2dfps13v39w02no.mysql.rds.aliyuncs.com"></a>rm-bp1w2dfps13v39w02no.mysql.rds.aliyuncs.com</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" data-id="cknhkb84l0006hwvc1t54fqfk" data-title="阿里云公网IP" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Markdown语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/04/15/Markdown%E8%AF%AD%E6%B3%95/" class="article-date">
@@ -397,94 +485,6 @@
 
 
   
-    <article id="post-文件上传与下载" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/14/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" class="article-date">
-  <time class="dt-published" datetime="2021-04-14T06:12:09.000Z" itemprop="datePublished">2021-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/14/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">文件的上传与下载</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="文件的上传与下载"><a href="#文件的上传与下载" class="headerlink" title="文件的上传与下载"></a>文件的上传与下载</h1><p><font color="red" font-weight=bold>前提是需要两个jar包</font></p>
-<ul>
-<li>commons-fileupload-1.2.2.jar</li>
-<li>commons-io-2.4.jar</li>
-</ul>
-<p><strong>文件上传</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line">		PrintWriter out = response.getWriter();</span><br><span class="line">		HttpSession session = request.getSession();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//判定请求是否是带有文件的请求</span></span><br><span class="line">		<span class="keyword">if</span>(ServletFileUpload.isMultipartContent(request))&#123;</span><br><span class="line">			<span class="comment">//创建upload对象</span></span><br><span class="line">			ServletFileUpload upload = <span class="keyword">new</span> ServletFileUpload(<span class="keyword">new</span> DiskFileItemFactory());</span><br><span class="line">			<span class="keyword">int</span> max = <span class="number">1780832</span>;</span><br><span class="line">			upload.setFileSizeMax(max);</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="comment">//upload对象解析请求（中的数据） </span></span><br><span class="line">				List&lt;FileItem&gt; items = upload.parseRequest(request);  <span class="comment">//文件项   请求中的每一个数据项</span></span><br><span class="line">				String username = <span class="string">&quot;&quot;</span>;</span><br><span class="line">				<span class="keyword">for</span> (FileItem item : items) &#123;</span><br><span class="line">					<span class="keyword">if</span> (!item.isFormField()) &#123; <span class="comment">//文件域数据</span></span><br><span class="line">						String fileName = item.getName();</span><br><span class="line">						<span class="keyword">if</span>(fileName.endsWith(<span class="string">&quot;.jpg&quot;</span>) || fileName.endsWith(<span class="string">&quot;.png&quot;</span>) || fileName.endsWith(<span class="string">&quot;.gif&quot;</span>) )&#123;</span><br><span class="line">							<span class="comment">//设定文件保存在服务器端的目录位置</span></span><br><span class="line">							String savePath = session.getServletContext().getRealPath(<span class="string">&quot;\\WEB-INF\\upload\\&quot;</span>+username);</span><br><span class="line">							<span class="comment">//保证该目录存在</span></span><br><span class="line">							File dir = <span class="keyword">new</span> File(savePath);</span><br><span class="line">							<span class="keyword">if</span>(!dir.exists()) dir.mkdirs();</span><br><span class="line">							<span class="comment">//设置唯一ID</span></span><br><span class="line">							String uuid = UUID.randomUUID().toString();</span><br><span class="line">							</span><br><span class="line">							<span class="comment">//用item.write把上传上来的文件写到该目录中</span></span><br><span class="line">							item.write(<span class="keyword">new</span> File(dir, uuid+<span class="string">&quot;-&quot;</span>+fileName));</span><br><span class="line">							session.setAttribute(<span class="string">&quot;info&quot;</span>, <span class="string">&quot;上传成功！&quot;</span>);</span><br><span class="line">							response.sendRedirect(<span class="string">&quot;welcome.jsp&quot;</span>);</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							session.setAttribute(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;文件格式必须是jpg、png、gif格式，上传失败！&quot;</span>);</span><br><span class="line">							response.sendRedirect(<span class="string">&quot;index.jsp&quot;</span>);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">						username = item.getString();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">catch</span>(FileUploadBase.FileSizeLimitExceededException e)&#123;</span><br><span class="line">				session.setAttribute(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;文件大小超过了最大值限制（最大&quot;</span>+max+<span class="string">&quot;字节）&quot;</span>);</span><br><span class="line">				response.sendRedirect(<span class="string">&quot;index.jsp&quot;</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		out.flush();</span><br><span class="line">		out.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>文件下载</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//		PrintWriter out = response.getWriter();</span></span><br><span class="line">		HttpSession session =request.getSession();</span><br><span class="line">		</span><br><span class="line">		String opr = request.getParameter(<span class="string">&quot;opr&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span>(opr == <span class="keyword">null</span>)&#123;</span><br><span class="line">			List&lt;String&gt; fileNames = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">			fileNames.add(<span class="string">&quot;Lighthouse.jpg&quot;</span>);</span><br><span class="line">			fileNames.add(<span class="string">&quot;Penguins.jpg&quot;</span>);</span><br><span class="line">			fileNames.add(<span class="string">&quot;Tulips.jpg&quot;</span>);</span><br><span class="line">			</span><br><span class="line">			session.setAttribute(<span class="string">&quot;names&quot;</span>, fileNames);</span><br><span class="line">			response.sendRedirect(<span class="string">&quot;index.jsp&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">&quot;download&quot;</span>.equals(opr))&#123;</span><br><span class="line">			List&lt;String&gt; fileNames = (List&lt;String&gt;)session.getAttribute(<span class="string">&quot;names&quot;</span>);</span><br><span class="line">			<span class="keyword">int</span> index = Integer.valueOf(request.getParameter(<span class="string">&quot;index&quot;</span>));</span><br><span class="line">			String fileName = fileNames.get(index);  <span class="comment">//获取到要下载的文件名</span></span><br><span class="line">			File file = <span class="keyword">new</span> File(<span class="string">&quot;D:\\download\\&quot;</span>+fileName);</span><br><span class="line">			<span class="keyword">if</span>(file.exists())&#123;</span><br><span class="line">				<span class="comment">//把服务器端目录中的文件读取到程序中来</span></span><br><span class="line">				FileInputStream fis = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">				<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[fis.available()];</span><br><span class="line">				fis.read(bytes);  <span class="comment">//图片的所有数据都在bytes数组中</span></span><br><span class="line">				<span class="comment">//设置响应头(让它以附件形式出现数据)</span></span><br><span class="line">				response.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span></span><br><span class="line">						+ fileName);</span><br><span class="line">				<span class="comment">//搞一个输出流（response身上获取）把bytes以附件的形式输出到页面</span></span><br><span class="line">				ServletOutputStream sos = response.getOutputStream();</span><br><span class="line">				sos.write(bytes);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line"><span class="comment">//		out.flush();</span></span><br><span class="line"><span class="comment">//		out.close();</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;utf-8&quot;</span>%&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span> %&gt;</span><br><span class="line">&lt;%</span><br><span class="line">String path = request.getContextPath();</span><br><span class="line">String basePath = request.getScheme()+<span class="string">&quot;://&quot;</span>+request.getServerName()+<span class="string">&quot;:&quot;</span>+request.getServerPort()+path+<span class="string">&quot;/&quot;</span>;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;base href=<span class="string">&quot;&lt;%=basePath%&gt;&quot;</span>&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;title&gt;My JSP &#x27;index.jsp&#x27; starting page&lt;/title&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.12.4.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    	$(function()&#123;</span><br><span class="line">    		</span><br><span class="line">    	&#125;);</span><br><span class="line">    	<span class="function">function <span class="title">show</span><span class="params">(index)</span></span>&#123;</span><br><span class="line">    		location.href = <span class="string">&quot;DownLoadServlet?opr=download&amp;index=&quot;</span>+index;</span><br><span class="line">    	&#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">	</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  	&lt;!-- 把服务器端的真实路径D:\\download映射成虚拟路径/ccc 给jsp页面使用 --&gt;</span><br><span class="line">  	&lt;!-- &lt;Context path=&quot;/ccc/&quot; docBase=&quot;D:\\download&quot;&gt;&lt;/Context&gt; --&gt;</span><br><span class="line">  	&lt;!--  配置在server.xml的Host节点里的最后 --&gt;</span><br><span class="line">  </span><br><span class="line">    &lt;c:forEach <span class="keyword">var</span>=<span class="string">&quot;name&quot;</span> items=<span class="string">&quot;$&#123;names &#125;&quot;</span> varStatus=<span class="string">&quot;status&quot;</span>&gt;</span><br><span class="line">    	&lt;img src=&quot;/ccc/$&#123;name &#125;&quot; width=&quot;15%&quot;/&gt;&amp;nbsp;&lt;a href=&quot;javascript:;&quot; onclick=&quot;show($&#123;status.index&#125;)&quot;&gt;下载&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">    &lt;/c:forEach&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/14/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" data-id="cknhkb84k0005hwvc5umm34ox" data-title="文件的上传与下载" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-阿里公网IP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/06/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" class="article-date">
-  <time class="dt-published" datetime="2021-04-06T02:12:09.000Z" itemprop="datePublished">2021-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/06/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/">阿里云公网IP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="rm-bp1w2dfps13v39w02no-mysql-rds-aliyuncs-com"><a href="#rm-bp1w2dfps13v39w02no-mysql-rds-aliyuncs-com" class="headerlink" title="rm-bp1w2dfps13v39w02no.mysql.rds.aliyuncs.com"></a>rm-bp1w2dfps13v39w02no.mysql.rds.aliyuncs.com</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/06/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" data-id="cknhkb84l0006hwvc1t54fqfk" data-title="阿里云公网IP" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
@@ -516,6 +516,10 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">文件的上传与下载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/">JSP的四大作用域及Cookie</a>
           </li>
         
@@ -528,11 +532,7 @@
           </li>
         
           <li>
-            <a href="/2021/04/15/Markdown%E8%AF%AD%E6%B3%95/">Markdown语法学习</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/14/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">文件的上传与下载</a>
+            <a href="/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/">阿里云公网IP</a>
           </li>
         
       </ul>
