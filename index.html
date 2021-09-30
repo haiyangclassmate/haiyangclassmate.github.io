@@ -99,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/30/Pom%20build/" data-id="cku5qviqh0003hovc6xi4bd5m" data-title="PomXml文件扫描" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/30/Pom%20build/" data-id="cku6fpesd00015wvcfyti7yxs" data-title="PomXml文件扫描" class="article-share-link">Share</a>
       
       
       
@@ -165,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/19/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%8E%E5%9B%BE%E7%89%87%E9%AA%8C%E8%AF%81%E7%A0%81/" data-id="cku5qviqm0008hovcek4r9vmr" data-title="短信验证码与图片验证码" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/19/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%8E%E5%9B%BE%E7%89%87%E9%AA%8C%E8%AF%81%E7%A0%81/" data-id="cku6fpess00095wvc19zehfu7" data-title="短信验证码与图片验证码" class="article-share-link">Share</a>
       
       
       
@@ -209,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/18/MySql%E7%9A%84%E8%87%AA%E5%A2%9E%E5%88%97/" data-id="cku5qviqg0002hovc7tvtckcb" data-title="MySql自增列相关" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/18/MySql%E7%9A%84%E8%87%AA%E5%A2%9E%E5%88%97/" data-id="cku6fpesi00035wvc6eefhttt" data-title="MySql自增列相关" class="article-share-link">Share</a>
       
       
       
@@ -259,104 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" data-id="cku5qviql0007hovcg6s69762" data-title="文件的上传与下载" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-JSP的四大作用域及Cookie" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/" class="article-date">
-  <time class="dt-published" datetime="2021-04-15T02:12:09.000Z" itemprop="datePublished">2021-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/">JSP的四大作用域及Cookie</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="JSP的四大作用域"><a href="#JSP的四大作用域" class="headerlink" title="JSP的四大作用域"></a>JSP的四大作用域</h1><blockquote>
-<p>1.page作用域</p>
-</blockquote>
-<p>==作用域只在当前.jsp页面有效==</p>
-<ul>
-<li><p>&lt;%@ include file=”testTwo.jsp” %&gt;  执行结果有值</p>
-</li>
-<li><p>&lt;% pageContext.include(“testTwo.jsp”); %&gt; 执行结果为null</p>
-<p><strong>两者区别如下</strong></p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    	<span class="built_in">String</span> name =<span class="string">&quot;page&quot;</span>;</span><br><span class="line">    	pageContext.setAttribute(<span class="string">&quot;name&quot;</span>, name); </span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;Strong&gt;</span><br><span class="line">    	&lt;%=pageContext.getAttribute(<span class="string">&quot;name&quot;</span>) %&gt;</span><br><span class="line">    &lt;/Strong&gt;</span><br><span class="line">    &lt;%@ include file=<span class="string">&quot;testTwo.jsp&quot;</span> %&gt;</span><br><span class="line">    <span class="comment">//是将两个jsp的文件夹合并为一个，然后翻译成.java文件，最后编译成为.class文件 ,然后执行。</span></span><br><span class="line">    a.jsp + b.jsp = c.jsp   </span><br><span class="line">    a和b的pageContext为同一个，最后都要合并为c.jsp里面的pageContext    </span><br><span class="line">    所以这里面的clude会取到pageContext里的值</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;%</span><br><span class="line">   	<span class="built_in">String</span> name =<span class="string">&quot;page&quot;</span>;</span><br><span class="line">   	pageContext.setAttribute(<span class="string">&quot;name&quot;</span>, name); </span><br><span class="line">   %&gt;</span><br><span class="line">   &lt;Strong&gt;</span><br><span class="line">   	&lt;%=pageContext.getAttribute(<span class="string">&quot;name&quot;</span>) %&gt;</span><br><span class="line">   &lt;/Strong&gt;</span><br><span class="line">   &lt;%</span><br><span class="line">   	pageContext.include(<span class="string">&quot;testTwo.jsp&quot;</span>); </span><br><span class="line">   	<span class="comment">//a.jsp include b.jsp</span></span><br><span class="line">   	<span class="comment">//1.先执行b.jsp--&gt;b.java--&gt;b.class--&gt;执行</span></span><br><span class="line">   	<span class="comment">//2.等b执行完后再与a合并--&gt;c.jsp--&gt;c.java--&gt;c.class--&gt;执行</span></span><br><span class="line">   	<span class="comment">//3.a 里面的pageContext 与 b 里面的pageContext 是两个不同的</span></span><br><span class="line">   	<span class="comment">//4.所以执行结果为null</span></span><br><span class="line">   %&gt;</span><br><span class="line"> &lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>2.request作用域</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    	<span class="built_in">String</span> name =<span class="string">&quot;HelloWorld&quot;</span>;</span><br><span class="line">    	request.setAttribute(<span class="string">&quot;name&quot;</span>, name);</span><br><span class="line">    	request.getRequestDispatcher(<span class="string">&quot;testTwo.jsp&quot;</span>).forward(request, response);</span><br><span class="line">    	<span class="comment">//因为是转发操作，只有一次请求，request身上是有值的，所以request的作用域在一次请求中有效。</span></span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>3.session作用域</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    	<span class="built_in">String</span> name =<span class="string">&quot;HelloWorldSession&quot;</span>;</span><br><span class="line">    	session.setAttribute(<span class="string">&quot;name&quot;</span>, name);</span><br><span class="line">    	response.sendRedirect(<span class="string">&quot;testTwo.jsp&quot;</span>);</span><br><span class="line">    	<span class="comment">//重定向  在重定向之前将数据保存到session中   </span></span><br><span class="line">    	<span class="comment">//session的作用域在一次会话中有效</span></span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>4.application作用域</p>
-</blockquote>
-<p>==只要tomcat服务器没有关闭，application的作用域就会一直都在==</p>
-<h2 id="tomcat的四大作用域及其区别"><a href="#tomcat的四大作用域及其区别" class="headerlink" title="tomcat的四大作用域及其区别"></a>tomcat的四大作用域及其区别</h2><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>page作用域</td>
-<td>在一个页面范围内有效，通过pageContext对象访问</td>
-</tr>
-<tr>
-<td>request作用域</td>
-<td>在一个服务器请求范围内有效</td>
-</tr>
-<tr>
-<td>session作用域</td>
-<td>在一次会话范围内有效</td>
-</tr>
-<tr>
-<td>application</td>
-<td>在一个应用服务器范围内有效（只要服务器没有关闭，都是有效的）</td>
-</tr>
-</tbody></table>
-<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/" data-id="cku5qviq70000hovc624n4tmh" data-title="JSP的四大作用域及Cookie" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" data-id="cku6fpesm00075wvch77de847" data-title="文件的上传与下载" class="article-share-link">Share</a>
       
       
       
@@ -473,7 +376,150 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/Markdown%E8%AF%AD%E6%B3%95/" data-id="cku5qviqe0001hovc81a90tsh" data-title="Markdown语法学习" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/Markdown%E8%AF%AD%E6%B3%95/" data-id="cku6fpes700005wvcddc1a04f" data-title="Markdown语法学习" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JSP的四大作用域及Cookie" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/" class="article-date">
+  <time class="dt-published" datetime="2021-04-15T02:12:09.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/">JSP的四大作用域及Cookie</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JSP的四大作用域"><a href="#JSP的四大作用域" class="headerlink" title="JSP的四大作用域"></a>JSP的四大作用域</h1><blockquote>
+<p>1.page作用域</p>
+</blockquote>
+<p>==作用域只在当前.jsp页面有效==</p>
+<ul>
+<li><p>&lt;%@ include file=”testTwo.jsp” %&gt;  执行结果有值</p>
+</li>
+<li><p>&lt;% pageContext.include(“testTwo.jsp”); %&gt; 执行结果为null</p>
+<p><strong>两者区别如下</strong></p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    	<span class="built_in">String</span> name =<span class="string">&quot;page&quot;</span>;</span><br><span class="line">    	pageContext.setAttribute(<span class="string">&quot;name&quot;</span>, name); </span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;Strong&gt;</span><br><span class="line">    	&lt;%=pageContext.getAttribute(<span class="string">&quot;name&quot;</span>) %&gt;</span><br><span class="line">    &lt;/Strong&gt;</span><br><span class="line">    &lt;%@ include file=<span class="string">&quot;testTwo.jsp&quot;</span> %&gt;</span><br><span class="line">    <span class="comment">//是将两个jsp的文件夹合并为一个，然后翻译成.java文件，最后编译成为.class文件 ,然后执行。</span></span><br><span class="line">    a.jsp + b.jsp = c.jsp   </span><br><span class="line">    a和b的pageContext为同一个，最后都要合并为c.jsp里面的pageContext    </span><br><span class="line">    所以这里面的clude会取到pageContext里的值</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;%</span><br><span class="line">   	<span class="built_in">String</span> name =<span class="string">&quot;page&quot;</span>;</span><br><span class="line">   	pageContext.setAttribute(<span class="string">&quot;name&quot;</span>, name); </span><br><span class="line">   %&gt;</span><br><span class="line">   &lt;Strong&gt;</span><br><span class="line">   	&lt;%=pageContext.getAttribute(<span class="string">&quot;name&quot;</span>) %&gt;</span><br><span class="line">   &lt;/Strong&gt;</span><br><span class="line">   &lt;%</span><br><span class="line">   	pageContext.include(<span class="string">&quot;testTwo.jsp&quot;</span>); </span><br><span class="line">   	<span class="comment">//a.jsp include b.jsp</span></span><br><span class="line">   	<span class="comment">//1.先执行b.jsp--&gt;b.java--&gt;b.class--&gt;执行</span></span><br><span class="line">   	<span class="comment">//2.等b执行完后再与a合并--&gt;c.jsp--&gt;c.java--&gt;c.class--&gt;执行</span></span><br><span class="line">   	<span class="comment">//3.a 里面的pageContext 与 b 里面的pageContext 是两个不同的</span></span><br><span class="line">   	<span class="comment">//4.所以执行结果为null</span></span><br><span class="line">   %&gt;</span><br><span class="line"> &lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>2.request作用域</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    	<span class="built_in">String</span> name =<span class="string">&quot;HelloWorld&quot;</span>;</span><br><span class="line">    	request.setAttribute(<span class="string">&quot;name&quot;</span>, name);</span><br><span class="line">    	request.getRequestDispatcher(<span class="string">&quot;testTwo.jsp&quot;</span>).forward(request, response);</span><br><span class="line">    	<span class="comment">//因为是转发操作，只有一次请求，request身上是有值的，所以request的作用域在一次请求中有效。</span></span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>3.session作用域</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    	<span class="built_in">String</span> name =<span class="string">&quot;HelloWorldSession&quot;</span>;</span><br><span class="line">    	session.setAttribute(<span class="string">&quot;name&quot;</span>, name);</span><br><span class="line">    	response.sendRedirect(<span class="string">&quot;testTwo.jsp&quot;</span>);</span><br><span class="line">    	<span class="comment">//重定向  在重定向之前将数据保存到session中   </span></span><br><span class="line">    	<span class="comment">//session的作用域在一次会话中有效</span></span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>4.application作用域</p>
+</blockquote>
+<p>==只要tomcat服务器没有关闭，application的作用域就会一直都在==</p>
+<h2 id="tomcat的四大作用域及其区别"><a href="#tomcat的四大作用域及其区别" class="headerlink" title="tomcat的四大作用域及其区别"></a>tomcat的四大作用域及其区别</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>page作用域</td>
+<td>在一个页面范围内有效，通过pageContext对象访问</td>
+</tr>
+<tr>
+<td>request作用域</td>
+<td>在一个服务器请求范围内有效</td>
+</tr>
+<tr>
+<td>session作用域</td>
+<td>在一次会话范围内有效</td>
+</tr>
+<tr>
+<td>application</td>
+<td>在一个应用服务器范围内有效（只要服务器没有关闭，都是有效的）</td>
+</tr>
+</tbody></table>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/" data-id="cku6fpesg00025wvc07tje057" data-title="JSP的四大作用域及Cookie" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-博客提交github命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/15/%E5%8D%9A%E5%AE%A2%E6%8F%90%E4%BA%A4github%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2021-04-15T02:12:09.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/15/%E5%8D%9A%E5%AE%A2%E6%8F%90%E4%BA%A4github%E5%91%BD%E4%BB%A4/">博客提交到github命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wapchief/article/details/54602515?ops_request_misc=&request_id=&biz_id=102&utm_term=hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-54602515.first_rank_v2_pc_rank_v29&spm=1018.2226.3001.4187">使用hexo+github免费搭建个人博客网站超详细教程</a></p>
+<p>记得提交以后去github上把hexo分支设置默认，以后写文章等都要部署。<br>文章在hexo目录下的\source_posts文件夹中，是md格式，也就是Markdown格式。<br>以后可以用以下命令部署。也就是第三步</p>
+<ul>
+<li><strong>如果部署时不clean，可能之前修改的文章还存在。包括一些配置等，有时候部署完成后并没有改变，其实是缓存未清除。</strong></li>
+<li><strong>在F:\blog\source目录下执行</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//等于一次性执行了，清空、刷新、部署三个命令</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E5%8D%9A%E5%AE%A2%E6%8F%90%E4%BA%A4github%E5%91%BD%E4%BB%A4/" data-id="cku6fpesj00045wvcguk39nov" data-title="博客提交到github命令" class="article-share-link">Share</a>
       
       
       
@@ -530,7 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/Tomcat%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="cku5qviqi0004hovcgv1dam66" data-title="tomcat安装遇到的问题" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/Tomcat%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="cku6fpesk00055wvc8rk295mn" data-title="tomcat安装遇到的问题" class="article-share-link">Share</a>
       
       
       
@@ -585,53 +631,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/ajax%E7%9A%84%E5%AD%A6%E4%B9%A0/" data-id="cku5qviqj0005hovcdhd1ejxt" data-title="ajax的相关学习资料" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-博客提交github命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/15/%E5%8D%9A%E5%AE%A2%E6%8F%90%E4%BA%A4github%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time class="dt-published" datetime="2021-04-15T02:12:09.000Z" itemprop="datePublished">2021-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/15/%E5%8D%9A%E5%AE%A2%E6%8F%90%E4%BA%A4github%E5%91%BD%E4%BB%A4/">博客提交到github命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wapchief/article/details/54602515?ops_request_misc=&request_id=&biz_id=102&utm_term=hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-54602515.first_rank_v2_pc_rank_v29&spm=1018.2226.3001.4187">使用hexo+github免费搭建个人博客网站超详细教程</a></p>
-<p>记得提交以后去github上把hexo分支设置默认，以后写文章等都要部署。<br>文章在hexo目录下的\source_posts文件夹中，是md格式，也就是Markdown格式。<br>以后可以用以下命令部署。也就是第三步</p>
-<ul>
-<li><strong>如果部署时不clean，可能之前修改的文章还存在。包括一些配置等，有时候部署完成后并没有改变，其实是缓存未清除。</strong></li>
-<li><strong>在F:\blog\source目录下执行</strong></li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//等于一次性执行了，清空、刷新、部署三个命令</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E5%8D%9A%E5%AE%A2%E6%8F%90%E4%BA%A4github%E5%91%BD%E4%BB%A4/" data-id="cku5qviqk0006hovcejzsfb6c" data-title="博客提交到github命令" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/ajax%E7%9A%84%E5%AD%A6%E4%B9%A0/" data-id="cku6fpesl00065wvc8zxz7hzs" data-title="ajax的相关学习资料" class="article-share-link">Share</a>
       
       
       
@@ -669,7 +669,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" data-id="cku5qviqn0009hovcaunu24mg" data-title="阿里云公网IP" class="article-share-link">Share</a>
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" data-id="cku6fpesn00085wvcefth2y67" data-title="阿里云公网IP" class="article-share-link">Share</a>
       
       
       
@@ -682,6 +682,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -728,7 +733,7 @@
           </li>
         
           <li>
-            <a href="/2021/04/15/JSP%E7%9A%84%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8ACookie/">JSP的四大作用域及Cookie</a>
+            <a href="/2021/04/15/Markdown%E8%AF%AD%E6%B3%95/">Markdown语法学习</a>
           </li>
         
       </ul>

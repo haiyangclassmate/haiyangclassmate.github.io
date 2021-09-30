@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Redis | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Redis命令Redis处理数据是单线程的 1234567891011121314151617181920212223242526272829303132333435363738394041421、firewalld的基本使用启动： systemctl start firewalld查看状态： systemctl status firewalld 停止： systemctl disable fir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://haiyangclassmate.github.io/2021/04/15/Redis/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Redis命令Redis处理数据是单线程的 1234567891011121314151617181920212223242526272829303132333435363738394041421、firewalld的基本使用启动： systemctl start firewalld查看状态： systemctl status firewalld 停止： systemctl disable fir">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-15T02:12:09.000Z">
+<meta property="article:modified_time" content="2021-09-30T04:23:35.697Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://haiyangclassmate.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Redis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/15/Redis/" class="article-date">
+  <time class="dt-published" datetime="2021-04-15T02:12:09.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Redis
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h1><p><strong><font color="red" font-size="30">Redis处理数据是单线程的</font></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、firewalld的基本使用</span><br><span class="line">启动： systemctl start firewalld</span><br><span class="line">查看状态： systemctl status firewalld </span><br><span class="line">停止： systemctl disable firewalld</span><br><span class="line">禁用： systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。</span><br><span class="line">启动一个服务：systemctl start firewalld.service</span><br><span class="line">关闭一个服务：systemctl stop firewalld.service</span><br><span class="line">重启一个服务：systemctl restart firewalld.service</span><br><span class="line">显示一个服务的状态：systemctl status firewalld.service</span><br><span class="line">在开机时启用一个服务：systemctl enable firewalld.service</span><br><span class="line">在开机时禁用一个服务：systemctl disable firewalld.service</span><br><span class="line">查看服务是否开机启动：systemctl is-enabled firewalld.service</span><br><span class="line">查看已启动的服务列表：systemctl list-unit-files|grep enabled</span><br><span class="line">查看启动失败的服务列表：systemctl --failed</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>配置firewalld-cmd</span><br><span class="line"></span><br><span class="line">查看版本： firewall-cmd --version</span><br><span class="line">查看帮助： firewall-cmd --help</span><br><span class="line">显示状态： firewall-cmd --state</span><br><span class="line">查看所有打开的端口： firewall-cmd --zone=<span class="keyword">public</span> --list-ports</span><br><span class="line">更新防火墙规则： firewall-cmd --reload</span><br><span class="line">查看区域信息:  firewall-cmd --get-active-zones</span><br><span class="line">查看指定接口所属区域： firewall-cmd --get-zone-of-<span class="class"><span class="keyword">interface</span></span>=eth0</span><br><span class="line">拒绝所有包：firewall-cmd --panic-on</span><br><span class="line">取消拒绝状态： firewall-cmd --panic-off</span><br><span class="line">查看是否拒绝： firewall-cmd --query-panic</span><br><span class="line"></span><br><span class="line">那怎么开启一个端口呢</span><br><span class="line">添加</span><br><span class="line">firewall-cmd --zone=<span class="keyword">public</span> --add-port=<span class="number">80</span>/tcp --permanent    （--permanent永久生效，没有此参数重启后失效）</span><br><span class="line">重新载入</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">查看</span><br><span class="line">firewall-cmd --zone= <span class="keyword">public</span> --query-port=<span class="number">80</span>/tcp</span><br><span class="line">删除</span><br><span class="line">firewall-cmd --zone= <span class="keyword">public</span> --remove-port=<span class="number">80</span>/tcp --permanent</span><br><span class="line">————————————————</span><br><span class="line">版权声明：本文为CSDN博主「假灬假」的原创文章，遵循CC <span class="number">4.0</span> BY-SA版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https:<span class="comment">//blog.csdn.net/j253507692/article/details/78704542</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Redis压缩包位置          —–                 cd /home/soft/</li>
+<li>Redis存放位置              —–                 cd /usr/local/redis-3.2.9</li>
+<li>Redis启动服务、开始工作     ——      cd /usr/local/redis-3.2.9/src<ul>
+<li>redis-server      启动服务</li>
+<li>redis-cli             启动客户端</li>
+</ul>
+</li>
+<li>前台启动Redis               —–               ./redis-server</li>
+<li>后台启动Redis               —–               ./redis-server  &amp;<ul>
+<li>后台启动的前提是修改 redis.conf 配置文件，设置后台启动redis服务</li>
+<li>把文件中的==daemonize==属性改为==yes==（表明需要在后台运行）</li>
+</ul>
+</li>
+<li>关闭Redis                     —–                  ./redis-cli shutdown</li>
+<li>关闭Redis                     —–                  kill -9 pid</li>
+<li>查看Redis进程              —–                 ps -ef | grep redis</li>
+</ul>
+<ul>
+<li>==cmd查看Redis端口是否开放   ——    telnet 云ip 6379==</li>
+<li>查看Redis进程和端口 —–                   netstat -an |grep 6379</li>
+<li>开启Redis防火墙         —–                   systemctl start firewalld</li>
+<li>查看防火墙状态（正在运行还是停止）：—–    systemctl status firewalld</li>
+<li>如果未开放6379端口则执行   ——      firewall-cmd –zone=public –add-port=6379/tcp –permanent</li>
+<li>查看对应端口防火墙是否关闭：  —– firewall-cmd –zone=public –query-port=端口号/tcp</li>
+<li>==查看已经开放的端口：                ——    firewall-cmd –list-all==         （<strong>RDM远程连不上先看看6379的端口是否开放</strong>）</li>
+</ul>
+<ul>
+<li><p>ping                             ——      返回pong表示Redis服务器正常运行</p>
+</li>
+<li><p>dbsize                         —–        返回第0个数据库的key数量</p>
+</li>
+<li><p>select  XXX                 ——       选择其他数据库  （select  0：表示选择第0 个数据库）</p>
+</li>
+<li><p>flushdb                      —–         删除==当前库==的数据</p>
+</li>
+<li><p>exit  或者  quit          —–         退出客户端（==没有退服务==）</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>操作键的命令</strong></p>
+</li>
+<li><p>keys  *                         —–         查询所有的key </p>
+<ul>
+<li>keys  w*              —–          查询key以w开头的字符（ wall、world、word、wood ）</li>
+<li>keys  wo?d          —–          一个问号代表一个字符（ word、wood ）</li>
+<li>keys  wo??d        —–          两个问号代表两个字符（ world ）</li>
+</ul>
+</li>
+<li><p>exists  key                  —–          判断当前key是否存在，存在即返回数量</p>
+<ul>
+<li>exists  k1            —–           1</li>
+<li>exists  k1  k2      —–           2</li>
+</ul>
+</li>
+<li><p>expire key seconds  —-            设置键的存活时间</p>
+<ul>
+<li>expire k1 20  （表示设置k1的存活时长为20秒）<ul>
+<li>设置成功返回数字1</li>
+<li>不成功返回数字0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ttl  key                        —–           返回key的剩余时间</p>
+<ul>
+<li>-1 ：没有设置 key 的生存时间， key 永不过期。</li>
+<li>-2：key 不存在</li>
+<li>数字：key 的剩余时间，秒为单位</li>
+</ul>
+</li>
+<li><p>type key                   ——            返回值：字符串表示的数据类型</p>
+<ul>
+<li>none (key 不存在) </li>
+<li>string (字符串) </li>
+<li>list (列表) </li>
+<li>set (集合) </li>
+<li>zset (有序集) </li>
+<li>hash (哈希表)</li>
+</ul>
+</li>
+<li><p>del key    [key1……]         —–              删除存在的 key，不存在的 key 忽略。</p>
+<ul>
+<li>数字，删除的 key 的数量。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-关于RDM连不上Redis的博客"><a href="#1-关于RDM连不上Redis的博客" class="headerlink" title="1. 关于RDM连不上Redis的博客"></a>1. 关于RDM连不上Redis的博客</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a760352276/article/details/105539652?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162615810216780269851416%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=162615810216780269851416&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-24-105539652.first_rank_v2_pc_rank_v29&utm_term=Redis%E9%98%B2%E7%81%AB%E5%A2%99&spm=1018.2226.3001.4187">点击查看</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/j253507692/article/details/78704542?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162623995716780366541123%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162623995716780366541123&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-4-78704542.first_rank_v2_pc_rank_v29&utm_term=redis%E9%98%B2%E7%81%AB%E5%A2%99&spm=1018.2226.3001.4187">点击查看完整版</a></p>
+<h2 id="2-数据类型操作命令"><a href="#2-数据类型操作命令" class="headerlink" title="2. 数据类型操作命令"></a>2. 数据类型操作命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">字符串类型（String）</span><br><span class="line">set k1 v1  ----- 设置键值对</span><br><span class="line">get k1   -----根据键得到相应的值</span><br><span class="line">incr k1 --------  v1+1  如果没有k1的话，就创建k1,且初始值为0   </span><br><span class="line">decr k1  -------  v1-1  同上</span><br><span class="line">append key value ----如果 key 存在，则将 value 追加到 key 原来旧值的末尾，如果 key 不存在，则将 key 设置值为 value</span><br><span class="line">	返回值：追加字符串之后的总长度</span><br><span class="line">	例如：get k3值为 &quot;v3&quot;</span><br><span class="line">		 append k3 aaa   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;   返回值总长度为5</span><br><span class="line">         k3值变为 &quot;v3aaa&quot;</span><br><span class="line">         </span><br><span class="line">         get k5值为 (nil) &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;   nil相当于java里的null,不存在的key,同 set key value</span><br><span class="line">		 append k5 aaa   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;   返回值总长度为3</span><br><span class="line">         k5值变为 &quot;aaa&quot;</span><br><span class="line">         </span><br><span class="line">strlen key   --------------- 求value的长度,有则返回长度，没有则返回0</span><br><span class="line">getrange key start end ----------- 求start到end的值，0开始，最后一位是-1   </span><br><span class="line">	例如：求最后四位  getrange key -4 -1</span><br><span class="line">setrange key offset value ----用 value 覆盖（替换）key 的存储的值从 offset 开始,不存在的 key 做空白字符串</span><br><span class="line">	返回值：修改后的字符串的长度</span><br><span class="line">mset key value [key value…]  -------同时设置一个或多个 key-value</span><br><span class="line">	返回值：OK </span><br><span class="line">mget key [key …]  --------获取所有(一个或多个)给定 key 的值</span><br><span class="line">	返回值：包含所有 key 的列表</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">哈希类型hash</span><br><span class="line">hset hash表的key field value --------将哈希表 key 中的域 field 的值设为 value，如果 key 不存在，则新建 hash 表</span><br><span class="line">赋值，如果有 field ,则覆盖值。</span><br><span class="line">	例如：:</span><br><span class="line">		hset website jd www.jd.com</span><br><span class="line">		hset websitr baidu www.baidu.com</span><br><span class="line">	返回值：</span><br><span class="line">		①如果 field 是 hash 表中新 field，且设置值成功，返回 1 </span><br><span class="line">		②如果 field 已经存在，旧值覆盖新值，返回 0</span><br><span class="line">hget key field  --------- 获取哈希表 key 中给定域 field 的值</span><br><span class="line">	返回值：</span><br><span class="line">		field 域的值，</span><br><span class="line">		如果 key 不存在或者 field 不存在返回 nil</span><br><span class="line">hmset key field value [field value…] -----------创建多个field value</span><br><span class="line">	例如:hmset website jd www.jd.com google www.google.com taobao www.taobao.com</span><br><span class="line">hmget key field[field...] ------------获取key中多个field的值</span><br><span class="line">	例如：hmget website jd google taobao</span><br><span class="line">hgetall key   ------------获取哈希表 key 中所有的域和值</span><br><span class="line">	返回值：</span><br><span class="line">		以列表形式返回 hash 中域和域的值，key 不存在，返回空 hash</span><br><span class="line">hdel key field [field…]  -----删除哈希表 key 中的一个或多个指定域 field，不存在 field 直接忽略</span><br><span class="line">	返回值：</span><br><span class="line">		成功删除的 field 的数量</span><br><span class="line"></span><br><span class="line">hkeys key ---------查看哈希表 key 中的所有 field 域</span><br><span class="line">kvals key ------返回哈希表 中所有域的值</span><br><span class="line">hexists key field ----------检查key中的field是否存在，如果 field 存在，返回 1，其他返回 0</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">列表list  left  right  (有序可重复)</span><br><span class="line">lpush key value [value…] ------------ 向列表key的左侧开始向列表的头部依次插入value</span><br><span class="line">	例如：lpush listone a b c  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;  值为c b a</span><br><span class="line">rpush key value [value…] ------------ 向列表key的右侧开始向列表的尾部依次插入value</span><br><span class="line">	例如：rpush mylist a b c   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;  值为a b c</span><br><span class="line">lrange key start end ---------------- 通过索引求出key start到end的值(从左侧开始)</span><br><span class="line">	例如：lrange mylist 0 1    &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;  值为a b</span><br><span class="line">lindex key index  ------------------- 查询key中指定下标的值</span><br><span class="line">	例如：lindex mylist 1      &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;  值为b	</span><br><span class="line">llen key ---------------------------- 获取列表 key 的长度</span><br><span class="line">	例如：llen mylist          &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;  值为3</span><br><span class="line">	</span><br><span class="line">lrem key count value ---------------- 根据参数 count 的值，移除列表中与参数 value 相等的元素</span><br><span class="line">	注意: count表示删除的方向和删除的个数</span><br><span class="line">		 count &gt; 0 从列表的左侧向右开始移除；</span><br><span class="line">		 count &lt; 0 从列表的尾部开始移除；</span><br><span class="line">		 count &#x3D; 0 移除表中所有与 value 相等的值。</span><br><span class="line">lset key index value ---------------- 替换key指定下标的值</span><br><span class="line">linsert key BEFORE|AFTER pivot value ------在key中向pivot前面或者后面插入值</span><br><span class="line">	例如：aaa中有两个值 dao controller</span><br><span class="line">	需求：向中间插入service</span><br><span class="line">	操作：linsert aaa after dao service</span><br><span class="line">    结果：dao service controller</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">集合类型set   (无序不可重复)</span><br><span class="line">sadd key member [member…]   --------- 将一个或多个member元素加入到集合key当中，插入重复的会会忽略</span><br><span class="line">smembers key ------------------------ 获取集合key中的所有成员元素，不存在的 key 视为空集合</span><br><span class="line">sismember key member ---------------- 检查key中是否存在member，存在返回1，不存在返回0</span><br><span class="line">scard key --------------------------- 获取集合里面的元素个数</span><br><span class="line">srem key member [member…] ----------- 删除集合 key 中的一个或多个 member 元素，不存在的元素被忽略</span><br><span class="line"></span><br><span class="line">srandmember key [count]  ------------ 随机返回集合中一个元素显示,count是查询的元素个数。不写默认是1</span><br><span class="line">	注意如果指定count的话:</span><br><span class="line">		当count &gt; 0,随机出来的不会重复</span><br><span class="line">		当count &lt; 0,随机出来的会重复</span><br><span class="line">spop key [count] ------------------- 随机从集合中删除一个元素, count 是删除的元素个数。不写默认是1</span><br><span class="line">	返回值：</span><br><span class="line">		被删除的元素，key 不存在或空集合返回 nil</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">有序集合类型zset</span><br><span class="line">zadd key score member [score member…]   ------创建一个有序集合，排序的方式按照member大小来排	</span><br><span class="line">	注意：</span><br><span class="line">		score 可以是整数或浮点数</span><br><span class="line">		zset集合中当scroe的分数相同时，排序的方式是按照首字母排序的</span><br><span class="line">zrange key start stop [WITHSCORES] -----------来获取指定区间内的成员，分数从小到大排（按下标获取）</span><br><span class="line">	注意：不加WITHSCORES，表示只显示score</span><br><span class="line">		 加上WITHSCORES，表示显示score和value一起返回</span><br><span class="line">zrevrange key start stop [WITHSCORES]  -------用法同上，分数从大到小排（按下标获取）</span><br><span class="line">zrem key member [member…]    -----------------删除有序集合 key 中的一个或多个成员，不存在的成员被忽略</span><br><span class="line">zcard key  -----------------------------------获取有序集 key 的元素成员的个数</span><br><span class="line">	返回值：</span><br><span class="line">		key 存在返回集合元素的个数， key 不存在，返回 0</span><br><span class="line"></span><br><span class="line">zrangebyscore key min max [WITHSCORES ] [LIMIT offset count] ---显示成绩在区间范围内的所有元素（分数从小到大）</span><br><span class="line">	例如：</span><br><span class="line">		zadd sal 2000 tom 3000 jack 4500 rose 5000 marry 6000 john  &#x3D;&#x3D;&#x3D;添加一组数据</span><br><span class="line">		zrangebyscore sal 2000 5000 withscores &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 工资2000&lt;&#x3D; score &lt;&#x3D;5000的所有成员</span><br><span class="line">		zrangebyscore sal (2000 (5000 withscores &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 工资2000&lt; score &lt;5000的所有成员</span><br><span class="line">		zrangebyscore sal (2000 5000 withscores &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 工资2000&lt; score &lt;&#x3D;5000的所有成员</span><br><span class="line">		zrangebyscore sal 3000 +inf withscores &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;工资score &gt;&#x3D;3000</span><br><span class="line">        zrangebyscore sal -inf (5000 withscores &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;工资score &lt;5000</span><br><span class="line">        zrangebyscore sal -inf +inf withscores &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;显示所有的成员及成绩</span><br><span class="line">        zrangebyscore sal -inf +inf withscores limit 0 1 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;显示成绩最小的那个</span><br><span class="line">        zrangebyscore sal -inf +inf withscores limit 1 2 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;显示成绩排行第二、第三的</span><br><span class="line">zrevrangebyscore key max min [WITHSCORES ] [LIMIT offset count] --显示成绩在区间范围内的所有元素(分数从大到小)</span><br><span class="line">	注意：</span><br><span class="line">		方法同上，分数从大到小</span><br><span class="line">zcount key min max -----------------------------------score值在范围内成员的个数（包括min、max）</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-事务"><a href="#3-事务" class="headerlink" title="3. 事务"></a>3. 事务</h2><ul>
+<li><p>multi              标记事务的开始</p>
+</li>
+<li><p>exec               执行所有事务块内的命令</p>
+</li>
+<li><p>discard          主动放弃事务，放弃执行事务块内的所有命令</p>
+</li>
+<li><p>watch             监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，</p>
+<p>​                        那么事务将被打断。任意时刻只有一个事务可以修改数据，保持数据一致。</p>
+</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>事务执行exec之前，入队命令错误，<strong>语法错误</strong>，导致服务器不能正常工作的，<strong>会放弃事务，都不执行。</strong></li>
+<li>事务执行exec之前，<strong>语法没错，执行时出错</strong>，事务中<strong>已执行的命令是正常执行的</strong>。（<strong>redis中没有事务回滚</strong>）</li>
+</ol>
+<h2 id="4-持久化"><a href="#4-持久化" class="headerlink" title="4. 持久化"></a>4. 持久化</h2><ul>
+<li><strong><font color="red">把内存中的数据保存到磁盘中</font></strong></li>
+</ul>
+<p>持久化可以理解为存储，就是将数据存储到一个不会丢失的地方，如果把数据放在内存</p>
+<p>中，电脑关闭或重启数据就会丢失，所以放在内存中的数据不是持久化的，而放在磁盘就算</p>
+<p>是一种持久化。</p>
+<p>Redis 的数据存储在内存中，内存是瞬时的，如果 linux 宕机或重启，又或者 Redis 崩溃</p>
+<p>或重启，所有的内存数据都会丢失，为解决这个问题，Redis 提供两种机制对数据进行持久</p>
+<p>化存储，便于发生故障后能迅速恢复数据。</p>
+<h3 id="4-1-RDB（快照方式）"><a href="#4-1-RDB（快照方式）" class="headerlink" title="4.1 RDB（快照方式）"></a>4.1 RDB（快照方式）</h3><p>​    Redis Database（RDB），就是在指定的时间间隔内将内存中的数据集快照写入磁盘，数</p>
+<p>据恢复时将快照文件直接再读到内存。</p>
+<p>RDB 保存了在某个时间点的数据集（全部数据）。存储在一个二进制文件中，只有一个</p>
+<p>文件。默认是 dump.rdb。RDB 技术非常适合做备份，可以保存最近一个小时，一天，一个月</p>
+<p>的全部数据。保存数据是在单独的进程中写文件，不影响 Redis 的正常使用。RDB 恢复数据</p>
+<p>时比其他 AOF 速度快</p>
+<p>==缺点：数据有丢失的可能性==</p>
+<h3 id="4-2-AOF"><a href="#4-2-AOF" class="headerlink" title="4.2 AOF"></a>4.2 AOF</h3><ul>
+<li>==只记录对库的修改命令==</li>
+</ul>
+<p>src下没有 appendonly.aof 文件时，修改上一级的redis.conf文件，将<strong>appendonly：默认是 no，改成 yes 即开启了 aof 持久化</strong></p>
+<h2 id="5-主从复制"><a href="#5-主从复制" class="headerlink" title="5. 主从复制"></a>5. 主从复制</h2><h3 id="5-1-主从复制-读写分离（master-slave）"><a href="#5-1-主从复制-读写分离（master-slave）" class="headerlink" title="5.1 主从复制-读写分离（master/slave）"></a>5.1 主从复制-读写分离（master/slave）</h3><p>实现步骤：</p>
+<ol>
+<li><p>复制redis.conf  分别为redis6380.conf     redis6380.conf    redis6380.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;主配置文件redis6380.conf内容</span><br><span class="line">include &#x2F;usr&#x2F;local&#x2F;redis-3.2.9&#x2F;redis.conf</span><br><span class="line">daemonize yes</span><br><span class="line">port 6380</span><br><span class="line">pidfile &#x2F;var&#x2F;run&#x2F;redis_6380.pid</span><br><span class="line">logfile 6380.log</span><br><span class="line">dbfilename dump6380.rdb</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;从配置文件redis6382.conf内容</span><br><span class="line">include &#x2F;usr&#x2F;local&#x2F;redis-3.2.9&#x2F;redis.conf</span><br><span class="line">daemonize yes</span><br><span class="line">port 6382</span><br><span class="line">pidfile &#x2F;var&#x2F;run&#x2F;redis_6382.pid</span><br><span class="line">logfile 6382.log</span><br><span class="line">dbfilename dump6382.rdb</span><br><span class="line">slaveof 127.0.0.1 6380</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;从配置文件redis6384.conf内容</span><br><span class="line">include &#x2F;usr&#x2F;local&#x2F;redis-3.2.9&#x2F;redis.conf</span><br><span class="line">daemonize yes</span><br><span class="line">port 6384</span><br><span class="line">pidfile &#x2F;var&#x2F;run&#x2F;redis_6384.pid</span><br><span class="line">logfile 6384.log</span><br><span class="line">dbfilename dump6384.rdb</span><br><span class="line">slaveof 127.0.0.1 6380</span><br></pre></td></tr></table></figure></li>
+<li><p>分别启动三个配置文件服务   <strong>ps -ef | grep redis</strong> 查一下</p>
+</li>
+<li><p>指定端口连接服务器   <strong>./redis-cli -p 6380</strong></p>
+</li>
+<li><p>查看服务器信息  <strong>info replication</strong></p>
+</li>
+<li><p>新开两个窗口 登录  6382端口和6384 端口查看服务器信息</p>
+</li>
+</ol>
+<p>==模拟容灾处理==</p>
+<ul>
+<li>当 Master 服务出现故障，需手动将 slave 中的一个提升为 master，剩下的 slave 挂至新的master 上（冷处理：机器挂掉了，再处理）</li>
+</ul>
+<p>命令：</p>
+<p>①：<strong>slaveof no one</strong>  将一台 slave 服务器提升为 Master （提升某 slave 为 master）</p>
+<p>②：<strong>slaveof 127.0.0.1 6382</strong>（将 slave 挂至新的 master 上）</p>
+<p>步骤：</p>
+<ol>
+<li><p>将 Master:6380 停止（模拟挂掉）</p>
+</li>
+<li><p>选择一个Slave 升到 Master，其它的Slave挂到新提升的 Master</p>
+<ul>
+<li><strong>slaveof no one</strong>      提升为master</li>
+</ul>
+</li>
+<li><p>将其他 Slave 挂到新的 Master</p>
+<ul>
+<li><strong>slaveof 127.0.0.1 6382</strong></li>
+</ul>
+</li>
+</ol>
+<p>==总结==</p>
+<p>1、一个 master 可以有多个 slave</p>
+<p>2、slave 下线，读请求的处理性能下降</p>
+<p>3、master 下线，写请求无法执行</p>
+<p>4、当 master 发生故障，需手动将其中一台 slave 使用 slaveof no one 命令提升为 master，其</p>
+<p>它 slave 执行 slaveof 命令指向这个新的 master，从新的 master 处同步数据</p>
+<p>5、主从复制模式的故障转移需要手动操作，要实现自动化处理，这就需要 Sentinel 哨兵，</p>
+<p>实现故障自动转移</p>
+<h3 id="5-2-高可用-Sentinel-哨兵"><a href="#5-2-高可用-Sentinel-哨兵" class="headerlink" title="5.2 高可用 Sentinel 哨兵"></a>5.2 高可用 Sentinel 哨兵</h3><p>Sentinel 系统有三个主要任务：</p>
+<p>⚫ ==监控：Sentinel 不断的检查主服务和从服务器是否按照预期正常工作。==</p>
+<p>⚫ 提醒：被监控的 Redis 出现问题时，Sentinel 会通知管理员或其他应用程序。</p>
+<p>⚫ 自动故障转移：监控的主 Redis 不能正常工作，Sentinel 会开始进行故障迁移操作。将</p>
+<p>一个从服务器升级新的主服务器。让其他从服务器挂到新的主服务器。同时向客户端提</p>
+<p>供新的主服务器地址。</p>
+<ul>
+<li><p>开启哨兵模式  —-     ./redis-sentinel ../sentinel26380.conf </p>
+<pre><code>                               ./redis-sentinel ../sentinel26382.conf 
+</code></pre>
+<p>​                                   ./redis-sentinel ../sentinel26384.conf </p>
+</li>
+</ul>
+<h2 id="6-安全设置"><a href="#6-安全设置" class="headerlink" title="6. 安全设置"></a>6. 安全设置</h2><h3 id="6-1-密码设置"><a href="#6-1-密码设置" class="headerlink" title="6.1 密码设置"></a>6.1 密码设置</h3><ul>
+<li><p>修改redis.conf的配置文件 </p>
+</li>
+<li><p>找到 requirepass 行去掉注释，requirepass 空格后就是密码。（123456）</p>
+</li>
+<li><p>访问有密码的 Redis 两种方式：</p>
+<p>①：在连接到客户端后，使用命令 ==auth==密码，命令执行成功后，可以正常使用 Redis</p>
+<p>②：在连接客户端时使用 -a 密码。例如 ./redis-cli -h ip -p port -a password</p>
+</li>
+</ul>
+<h2 id="7-Jedis操作Redis"><a href="#7-Jedis操作Redis" class="headerlink" title="7. Jedis操作Redis"></a>7. Jedis操作Redis</h2><ul>
+<li>==注意一定要开启防火墙==，因为linux服务器防火墙开启了6379端口。（<strong>电脑需要联网</strong>）</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--redis项目依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--线程安全的连接池--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-pool2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定redis所在的linux服务器的IP和端口</span></span><br><span class="line">Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">&quot;106.15.170.117&quot;</span>,<span class="number">6379</span>);</span><br><span class="line"><span class="comment">//redis的登录密码</span></span><br><span class="line">jedis.auth(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line">jedis.set(<span class="string">&quot;day&quot;</span>,<span class="string">&quot;星期天&quot;</span>);</span><br><span class="line">jedis.mset(<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;宋&quot;</span>,<span class="string">&quot;bb&quot;</span>,<span class="string">&quot;汉&quot;</span>);</span><br><span class="line">List&lt;String&gt; mget = jedis.mget(<span class="string">&quot;aa&quot;</span>, <span class="string">&quot;bb&quot;</span>);</span><br><span class="line"><span class="keyword">for</span>(String mm:mget)&#123;</span><br><span class="line">	System.out.println(mm);</span><br><span class="line">&#125;</span><br><span class="line">String day = jedis.get(<span class="string">&quot;day&quot;</span>);</span><br><span class="line">jedis.flushDB();</span><br><span class="line"><span class="comment">//System.out.println(day);</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://haiyangclassmate.github.io/2021/04/15/Redis/" data-id="cku6fpest000a5wvcagrw8l0g" data-title="Redis" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/15/%E9%98%BF%E9%87%8C%E5%85%AC%E7%BD%91IP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          阿里云公网IP
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/30/Pom%20build/">PomXml文件扫描</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%8E%E5%9B%BE%E7%89%87%E9%AA%8C%E8%AF%81%E7%A0%81/">短信验证码与图片验证码</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/18/MySql%E7%9A%84%E8%87%AA%E5%A2%9E%E5%88%97/">MySql自增列相关</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">文件的上传与下载</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/15/Markdown%E8%AF%AD%E6%B3%95/">Markdown语法学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
